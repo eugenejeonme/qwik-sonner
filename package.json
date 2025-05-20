@@ -1,6 +1,6 @@
 {
   "name": "qwik-sonner",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An opinionated toast component for Qwik.",
   "keywords": [
     "qwik",
@@ -11,8 +11,12 @@
     "sonner"
   ],
   "author": {
-    "name": "diecodev",
-    "url": "https://github.com/diecodev"
+    "upstream": {
+      "name": "diecodev",
+      "url": "https://github.com/diecodev"
+    },
+    "name": "eugene",
+    "url": "https://github.com/eugenejeoneme"
   },
   "contributors": [
     {
@@ -21,16 +25,17 @@
     }
   ],
   "repository": {
+    "upstream": {
+      "type": "git",
+      "url": "git+https://github.com/diecodev/qwik-sonner.git"
+    },
     "type": "git",
-    "url": "git+https://github.com/diecodev/qwik-sonner.git"
+    "url": "git+https://github.com/eugenejeonme/qwik-sonner.git"
   },
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
   "types": "./lib-types/index.d.ts",
-  "files": [
-    "lib",
-    "lib-types"
-  ],
+  "files": ["lib", "lib-types"],
   "exports": {
     ".": {
       "node": {
@@ -94,5 +99,6 @@
     "undici": "*",
     "vite": "^5.2.10",
     "vite-tsconfig-paths": "^4.2.1"
-  }
+  },
+  "workspaces": [".", "website", "test"]
 }

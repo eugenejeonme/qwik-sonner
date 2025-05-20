@@ -6,9 +6,7 @@
   },
   "engines-annotation": "Mostly required by sharp which needs a Node-API v9 compatible runtime",
   "private": true,
-  "trustedDependencies": [
-    "sharp"
-  ],
+  "trustedDependencies": ["sharp"],
   "trustedDependencies-annotation": "Needed for bun to allow running install scripts",
   "type": "module",
   "scripts": {
@@ -36,7 +34,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-qwik": "^1.5.3",
     "prettier": "^3.2.5",
-    "qwik-sonner": "workspace:*",
+    "qwik-sonner": "file:../",
     "typescript": "5.4.5",
     "undici": "*",
     "vite": "^5.2.10",

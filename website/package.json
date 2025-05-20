@@ -5,9 +5,7 @@
     "node": ">=15.0.0"
   },
   "private": true,
-  "trustedDependencies": [
-    "sharp"
-  ],
+  "trustedDependencies": ["sharp"],
   "type": "module",
   "scripts": {
     "build": "qwik build",
@@ -40,7 +38,7 @@
     "postcss": "8.4.38",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "0.5.13",
-    "qwik-sonner": "workspace:*",
+    "qwik-sonner": "file:../",
     "tailwindcss": "3.4.3",
     "typescript": "5.4.3",
     "undici": "*",
