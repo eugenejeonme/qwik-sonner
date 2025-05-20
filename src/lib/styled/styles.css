@@ -1,5 +1,5 @@
-:where(html[dir='ltr']),
-:where([data-qwik-toaster][dir='ltr']) {
+:where(html[dir="ltr"]),
+:where([data-qwik-toaster][dir="ltr"]) {
   --toast-icon-margin-start: -3px;
   --toast-icon-margin-end: 4px;
   --toast-svg-margin-start: -1px;
@@ -11,8 +11,8 @@
   --toast-close-button-transform: translate(-35%, -35%);
 }
 
-:where(html[dir='rtl']),
-:where([data-qwik-toaster][dir='rtl']) {
+:where(html[dir="rtl"]),
+:where([data-qwik-toaster][dir="rtl"]) {
   --toast-icon-margin-start: 4px;
   --toast-icon-margin-end: -3px;
   --toast-svg-margin-start: 0px;
@@ -27,8 +27,21 @@
 :where([data-qwik-toaster]) {
   position: fixed;
   width: var(--width);
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
-    Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji;
   --gray1: hsl(0, 0%, 99%);
   --gray2: hsl(0, 0%, 97.3%);
   --gray3: hsl(0, 0%, 95.1%);
@@ -50,24 +63,24 @@
   z-index: 999999999;
 }
 
-:where([data-qwik-toaster][data-x-position='right']) {
+:where([data-qwik-toaster][data-x-position="right"]) {
   right: max(var(--offset), env(safe-area-inset-right));
 }
 
-:where([data-qwik-toaster][data-x-position='left']) {
+:where([data-qwik-toaster][data-x-position="left"]) {
   left: max(var(--offset), env(safe-area-inset-left));
 }
 
-:where([data-qwik-toaster][data-x-position='center']) {
+:where([data-qwik-toaster][data-x-position="center"]) {
   left: 50%;
   transform: translateX(-50%);
 }
 
-:where([data-qwik-toaster][data-y-position='top']) {
+:where([data-qwik-toaster][data-y-position="top"]) {
   top: max(var(--offset), env(safe-area-inset-top));
 }
 
-:where([data-qwik-toaster][data-y-position='bottom']) {
+:where([data-qwik-toaster][data-y-position="bottom"]) {
   bottom: max(var(--offset), env(safe-area-inset-bottom));
 }
 
@@ -81,13 +94,17 @@
   filter: blur(0);
   /* https://stackoverflow.com/questions/48124372/pointermove-event-not-working-with-touch-why-not */
   touch-action: none;
-  transition: transform 400ms, opacity 400ms, height 400ms, box-shadow 200ms;
+  transition:
+    transform 400ms,
+    opacity 400ms,
+    height 400ms,
+    box-shadow 200ms;
   box-sizing: border-box;
   outline: none;
   overflow-wrap: anywhere;
 }
 
-:where([data-qwik-toast][data-styled='true']) {
+:where([data-qwik-toast][data-styled="true"]) {
   padding: 16px;
   background: var(--normal-bg);
   border: 1px solid var(--normal-border);
@@ -102,17 +119,19 @@
 }
 
 :where([data-qwik-toast]:focus-visible) {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0px 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
-:where([data-qwik-toast][data-y-position='top']) {
+:where([data-qwik-toast][data-y-position="top"]) {
   top: 0;
   --y: translateY(-100%);
   --lift: 1;
   --lift-amount: calc(1 * var(--gap));
 }
 
-:where([data-qwik-toast][data-y-position='bottom']) {
+:where([data-qwik-toast][data-y-position="bottom"]) {
   bottom: 0;
   --y: translateY(100%);
   --lift: -1;
@@ -143,14 +162,14 @@
   margin-right: var(--toast-icon-margin-end);
 }
 
-:where([data-qwik-toast][data-promise='true']) :where([data-icon])>svg {
+:where([data-qwik-toast][data-promise="true"]) :where([data-icon]) > svg {
   opacity: 0;
   transform: scale(0.8);
   transform-origin: center;
   animation: qwik-fade-in 300ms ease forwards;
 }
 
-:where([data-qwik-toast]) :where([data-icon])>* {
+:where([data-qwik-toast]) :where([data-icon]) > * {
   flex-shrink: 0;
 }
 
@@ -181,7 +200,9 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  transition: opacity 400ms, box-shadow 200ms;
+  transition:
+    opacity 400ms,
+    box-shadow 200ms;
 }
 
 :where([data-qwik-toast]) :where([data-button]):focus-visible {
@@ -198,7 +219,7 @@
   background: rgba(0, 0, 0, 0.08);
 }
 
-:where([data-qwik-toast][data-theme='dark']) :where([data-cancel]) {
+:where([data-qwik-toast][data-theme="dark"]) :where([data-cancel]) {
   background: rgba(255, 255, 255, 0.3);
 }
 
@@ -220,14 +241,19 @@
   border-radius: 50%;
   cursor: pointer;
   z-index: 1;
-  transition: opacity 100ms, background 200ms, border-color 200ms;
+  transition:
+    opacity 100ms,
+    background 200ms,
+    border-color 200ms;
 }
 
 :where([data-qwik-toast]) :where([data-close-button]):focus-visible {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0px 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
-:where([data-qwik-toast]) :where([data-disabled='true']) {
+:where([data-qwik-toast]) :where([data-disabled="true"]) {
   cursor: not-allowed;
 }
 
@@ -237,8 +263,8 @@
 }
 
 /* Leave a ghost div to avoid setting hover to false when swiping out */
-:where([data-qwik-toast][data-swiping='true'])::before {
-  content: '';
+:where([data-qwik-toast][data-swiping="true"])::before {
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -246,21 +272,23 @@
   z-index: -1;
 }
 
-:where([data-qwik-toast][data-y-position='top'][data-swiping='true'])::before {
+:where([data-qwik-toast][data-y-position="top"][data-swiping="true"])::before {
   /* y 50% needed to distribute height additional height evenly */
   bottom: 50%;
   transform: scaleY(3) translateY(50%);
 }
 
-:where([data-qwik-toast][data-y-position='bottom'][data-swiping='true'])::before {
+:where(
+    [data-qwik-toast][data-y-position="bottom"][data-swiping="true"]
+  )::before {
   /* y -50% needed to distribute height additional height evenly */
   top: 50%;
   transform: scaleY(3) translateY(-50%);
 }
 
 /* Leave a ghost div to avoid setting hover to false when transitioning out */
-:where([data-qwik-toast][data-swiping='false'][data-removed='true'])::before {
-  content: '';
+:where([data-qwik-toast][data-swiping="false"][data-removed="true"])::before {
+  content: "";
   position: absolute;
   inset: 0;
   transform: scaleY(2);
@@ -268,7 +296,7 @@
 
 /* Needed to avoid setting hover to false when inbetween toasts */
 :where([data-qwik-toast])::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   height: calc(var(--gap) + 1px);
@@ -276,74 +304,92 @@
   width: 100%;
 }
 
-:where([data-qwik-toast][data-mounted='true']) {
+:where([data-qwik-toast][data-mounted="true"]) {
   --y: translateY(0);
   opacity: 1;
 }
 
-:where([data-qwik-toast][data-expanded='false'][data-front='false']) {
+:where([data-qwik-toast][data-expanded="false"][data-front="false"]) {
   --scale: var(--toasts-before) * 0.05 + 1;
-  --y: translateY(calc(var(--lift-amount) * var(--toasts-before))) scale(calc(-1 * var(--scale)));
+  --y: translateY(calc(var(--lift-amount) * var(--toasts-before)))
+    scale(calc(-1 * var(--scale)));
   height: var(--front-toast-height);
 }
 
-:where([data-qwik-toast])>* {
+:where([data-qwik-toast]) > * {
   transition: opacity 400ms;
 }
 
-:where([data-qwik-toast][data-expanded='false'][data-front='false'][data-styled='true'])>* {
+:where(
+    [data-qwik-toast][data-expanded="false"][data-front="false"][data-styled="true"]
+  )
+  > * {
   opacity: 0;
 }
 
-:where([data-qwik-toast][data-visible='false']) {
+:where([data-qwik-toast][data-visible="false"]) {
   opacity: 0;
   pointer-events: none;
 }
 
-:where([data-qwik-toast][data-mounted='true'][data-expanded='true']) {
+:where([data-qwik-toast][data-mounted="true"][data-expanded="true"]) {
   --y: translateY(calc(var(--lift) * var(--offset)));
   height: var(--initial-height);
 }
 
-:where([data-qwik-toast][data-removed='true'][data-front='true'][data-swipe-out='false']) {
+:where(
+  [data-qwik-toast][data-removed="true"][data-front="true"][data-swipe-out="false"]
+) {
   --y: translateY(calc(var(--lift) * -100%));
   opacity: 0;
 }
 
-:where([data-qwik-toast][data-removed='true'][data-front='false'][data-swipe-out='false'][data-expanded='true']) {
+:where(
+  [data-qwik-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="true"]
+) {
   --y: translateY(calc(var(--lift) * var(--offset) + var(--lift) * -100%));
   opacity: 0;
 }
 
-:where([data-qwik-toast][data-removed='true'][data-front='false'][data-swipe-out='false'][data-expanded='false']) {
+:where(
+  [data-qwik-toast][data-removed="true"][data-front="false"][data-swipe-out="false"][data-expanded="false"]
+) {
   --y: translateY(40%);
   opacity: 0;
-  transition: transform 500ms, opacity 200ms;
+  transition:
+    transform 500ms,
+    opacity 200ms;
 }
 
 /* Bump up the height to make sure hover state doesn't get set to false */
-:where([data-qwik-toast][data-removed='true'][data-front='false'])::before {
+:where([data-qwik-toast][data-removed="true"][data-front="false"])::before {
   height: calc(var(--initial-height) + 20%);
 }
 
-[data-qwik-toast][data-swiping='true'] {
+[data-qwik-toast][data-swiping="true"] {
   transform: var(--y) translateY(var(--swipe-amount, 0px));
   transition: none;
 }
 
-[data-qwik-toast][data-swipe-out='true'][data-y-position='bottom'],
-[data-qwik-toast][data-swipe-out='true'][data-y-position='top'] {
+[data-qwik-toast][data-swipe-out="true"][data-y-position="bottom"],
+[data-qwik-toast][data-swipe-out="true"][data-y-position="top"] {
   animation: swipe-out 200ms ease-out forwards;
 }
 
 @keyframes swipe-out {
   from {
-    transform: translateY(calc(var(--lift) * var(--offset) + var(--swipe-amount)));
+    transform: translateY(
+      calc(var(--lift) * var(--offset) + var(--swipe-amount))
+    );
     opacity: 1;
   }
 
   to {
-    transform: translateY(calc(var(--lift) * var(--offset) + var(--swipe-amount) + var(--lift) * -100%));
+    transform: translateY(
+      calc(
+        var(--lift) * var(--offset) + var(--swipe-amount) + var(--lift) * -100%
+      )
+    );
     opacity: 0;
   }
 }
@@ -363,26 +409,26 @@
     width: calc(100% - var(--mobile-offset) * 2);
   }
 
-  [data-qwik-toaster][data-x-position='left'] {
+  [data-qwik-toaster][data-x-position="left"] {
     left: var(--mobile-offset);
   }
 
-  [data-qwik-toaster][data-y-position='bottom'] {
+  [data-qwik-toaster][data-y-position="bottom"] {
     bottom: 20px;
   }
 
-  [data-qwik-toaster][data-y-position='top'] {
+  [data-qwik-toaster][data-y-position="top"] {
     top: 20px;
   }
 
-  [data-qwik-toaster][data-x-position='center'] {
+  [data-qwik-toaster][data-x-position="center"] {
     left: var(--mobile-offset);
     right: var(--mobile-offset);
     transform: none;
   }
 }
 
-[data-qwik-toaster][data-theme='light'] {
+[data-qwik-toaster][data-theme="light"] {
   --normal-bg: #fff;
   --normal-border: var(--gray4);
   --normal-text: var(--gray12);
@@ -404,19 +450,19 @@
   --error-text: hsl(360, 100%, 45%);
 }
 
-[data-qwik-toaster][data-theme='light'] [data-qwik-toast][data-invert='true'] {
+[data-qwik-toaster][data-theme="light"] [data-qwik-toast][data-invert="true"] {
   --normal-bg: #000;
   --normal-border: hsl(0, 0%, 20%);
   --normal-text: var(--gray1);
 }
 
-[data-qwik-toaster][data-theme='dark'] [data-qwik-toast][data-invert='true'] {
+[data-qwik-toaster][data-theme="dark"] [data-qwik-toast][data-invert="true"] {
   --normal-bg: #fff;
   --normal-border: var(--gray3);
   --normal-text: var(--gray12);
 }
 
-[data-qwik-toaster][data-theme='dark'] {
+[data-qwik-toaster][data-theme="dark"] {
   --normal-bg: #000;
   --normal-border: hsl(0, 0%, 20%);
   --normal-text: var(--gray1);
@@ -438,49 +484,57 @@
   --error-text: hsl(358, 100%, 81%);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='success'] {
+[data-rich-colors="true"] [data-qwik-toast][data-type="success"] {
   background: var(--success-bg);
   border-color: var(--success-border);
   color: var(--success-text);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='success'] [data-close-button] {
+[data-rich-colors="true"]
+  [data-qwik-toast][data-type="success"]
+  [data-close-button] {
   background: var(--success-bg);
   border-color: var(--success-border);
   color: var(--success-text);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='info'] {
+[data-rich-colors="true"] [data-qwik-toast][data-type="info"] {
   background: var(--info-bg);
   border-color: var(--info-border);
   color: var(--info-text);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='info'] [data-close-button] {
+[data-rich-colors="true"]
+  [data-qwik-toast][data-type="info"]
+  [data-close-button] {
   background: var(--info-bg);
   border-color: var(--info-border);
   color: var(--info-text);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='warning'] {
+[data-rich-colors="true"] [data-qwik-toast][data-type="warning"] {
   background: var(--warning-bg);
   border-color: var(--warning-border);
   color: var(--warning-text);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='warning'] [data-close-button] {
+[data-rich-colors="true"]
+  [data-qwik-toast][data-type="warning"]
+  [data-close-button] {
   background: var(--warning-bg);
   border-color: var(--warning-border);
   color: var(--warning-text);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='error'] {
+[data-rich-colors="true"] [data-qwik-toast][data-type="error"] {
   background: var(--error-bg);
   border-color: var(--error-border);
   color: var(--error-text);
 }
 
-[data-rich-colors='true'] [data-qwik-toast][data-type='error'] [data-close-button] {
+[data-rich-colors="true"]
+  [data-qwik-toast][data-type="error"]
+  [data-close-button] {
   background: var(--error-bg);
   border-color: var(--error-border);
   color: var(--error-text);
@@ -495,7 +549,7 @@
   z-index: 10;
 }
 
-.qwik-loading-wrapper[data-visible='false'] {
+.qwik-loading-wrapper[data-visible="false"] {
   transform-origin: center;
   animation: qwik-fade-out 0.2s ease forwards;
 }
@@ -614,9 +668,8 @@
 }
 
 @media (prefers-reduced-motion) {
-
   [data-qwik-toast],
-  [data-qwik-toast]>*,
+  [data-qwik-toast] > *,
   .qwik-loading-bar {
     transition: none !important;
     animation: none !important;
@@ -629,10 +682,58 @@
   left: 50%;
   transform: translate(-50%, -50%);
   transform-origin: center;
-  transition: opacity 200ms, transform 200ms;
+  transition:
+    opacity 200ms,
+    transform 200ms;
 }
 
-.qwik-loader[data-visible='false'] {
+.qwik-loader[data-visible="false"] {
   opacity: 0;
   transform: scale(0.8) translate(-50%, -50%);
+}
+
+/**
+ * :not([data-rich-colors="true"]) 는 아래와 같은 의미
+ * [data-qwik-toaster]:not([data-rich-colors="true"])
+ *
+ * 아래 처럼 [data-theme] 속성을 사용해서 작성할 수 도 있음
+ * [data-qwik-toaster][data-theme="light"]:not([data-rich-colors="true"])
+ * [data-qwik-toaster][data-theme="dark"]:not([data-rich-colors="true"])
+ */
+:not([data-rich-colors="true"]) [data-qwik-toast] {
+  --progress-bar-color: var(--normal-text);
+}
+
+[data-rich-colors="true"] [data-qwik-toast][data-type="success"] {
+  --progress-bar-color: var(--success-text);
+}
+
+[data-rich-colors="true"] [data-qwik-toast][data-type="error"] {
+  --progress-bar-color: var(--error-text);
+}
+
+[data-rich-colors="true"] [data-qwik-toast][data-type="info"] {
+  --progress-bar-color: var(--info-text);
+}
+
+[data-rich-colors="true"] [data-qwik-toast][data-type="warning"] {
+  --progress-bar-color: var(--warning-text);
+}
+
+[data-qwik-toast] .qwik-toast-progress-bar-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 0 0 5px 5px;
+  padding: 1px 2px;
+}
+
+[data-qwik-toast] .qwik-toast-progress-bar {
+  height: 100%;
+  transition: width 0.5s;
+  border-radius: 0 0 0 5px;
+  background: var(--progress-bar-color);
+  border-color: var(--normal-border);
 }

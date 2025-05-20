@@ -1,43 +1,43 @@
 import {
   $,
+  type QwikVisibleEvent,
   component$,
-  QwikVisibleEvent,
   useComputed$,
   useOnDocument,
   useSignal,
   useTask$,
-} from "@builder.io/qwik";
-import {
-  HeightT,
-  Theme,
-  ToasterProps,
-  ToastT,
-  ToastToDismiss,
-  ToastProps,
-} from "./types";
+} from '@builder.io/qwik';
 import {
   GAP,
-  TOAST_WIDTH,
-  VIEWPORT_OFFSET,
-  VISIBLE_TOASTS_AMOUNT,
   SWIPE_THRESHOLD,
   TIME_BEFORE_UNMOUNT,
   TOAST_LIFETIME,
-} from "./const";
-import { ToastState } from "./state";
-import { Toast } from "./toast";
-import { toast } from "./state";
+  TOAST_WIDTH,
+  VIEWPORT_OFFSET,
+  VISIBLE_TOASTS_AMOUNT,
+} from './const';
+import { ToastState } from './state';
+import { toast } from './state';
+import { Toast } from './toast';
+import type {
+  HeightT,
+  Theme,
+  ToastProps,
+  ToastT,
+  ToastToDismiss,
+  ToasterProps,
+} from './types';
 
 const Toaster = component$<ToasterProps>((props) => {
   const {
     invert = false,
-    position = "bottom-right",
-    hotkey = ["altKey", "KeyT"],
+    position = 'bottom-right',
+    hotkey = ['altKey', 'KeyT'],
     expand,
     closeButton,
     class: localClass,
     offset,
-    theme = "light",
+    theme = 'light',
     richColors,
     duration,
     style,
@@ -47,7 +47,7 @@ const Toaster = component$<ToasterProps>((props) => {
     gap = GAP,
     loadingIcon,
     icons,
-    containerAriaLabel = "Notifications",
+    containerAriaLabel = 'Notifications',
     pauseWhenPageIsHidden,
   } = props;
 
@@ -65,92 +65,93 @@ const Toaster = component$<ToasterProps>((props) => {
         [position].concat(
           toasts.value
             .filter((toast) => toast.position)
-            .map((toast) => toast.position!)
-        )
-      )
+            .map((toast) => toast.position!),
+        ),
+      ),
     );
   });
 
   const hotkeyLabel = hotkey
-    .join("+")
-    .replace(/Key/g, "")
-    .replace(/Digit/g, "");
+    .join('+')
+    .replace(/Key/g, '')
+    .replace(/Digit/g, '');
 
-  const removeToast = $(
-    (toast: ToastT) =>
-      (toasts.value = toasts.value.filter(({ id }) => id !== toast.id))
-  );
+  const removeToast = $((toast: ToastT) => {
+    toasts.value = toasts.value.filter(({ id }) => id !== toast.id);
+  });
 
   const onMountHandler = $((_: QwikVisibleEvent, _1: HTMLElement) => {
     return ToastState.subscribe((toast) => {
       if ((toast as ToastToDismiss).dismiss) {
         toasts.value = toasts.value.map((t) =>
-          t.id === toast.id ? { ...t, delete: true } : t
+          t.id === toast.id ? { ...t, delete: true } : t,
         );
         return;
       }
 
       const indexOfExistingToast = toasts.value.findIndex(
-        (t) => t.id === toast.id
+        (t) => t.id === toast.id,
       );
 
       if (indexOfExistingToast !== -1) {
-        return (toasts.value = [
+        toasts.value = [
           ...toasts.value.slice(0, indexOfExistingToast),
           { ...toasts.value[indexOfExistingToast], ...toast },
           ...toasts.value.slice(indexOfExistingToast + 1),
-        ]);
+        ];
+        return;
       }
 
-      return (toasts.value = [toast, ...toasts.value]);
+      toasts.value = [toast, ...toasts.value];
+      return;
     });
   });
 
   const onMountThemeHandler = $((_: QwikVisibleEvent, _1: HTMLElement) => {
-    const selectedTheme = listRef.value?.getAttribute("data-theme") as Theme;
+    const selectedTheme = listRef.value?.getAttribute('data-theme') as Theme;
 
-    if (selectedTheme !== "system") return;
+    if (selectedTheme !== 'system') return;
 
-    const themeFromLocalStorage = localStorage.getItem("theme") as Theme;
+    const themeFromLocalStorage = localStorage.getItem('theme') as Theme;
 
     if (themeFromLocalStorage) {
-      return listRef.value?.setAttribute("data-theme", themeFromLocalStorage);
+      return listRef.value?.setAttribute('data-theme', themeFromLocalStorage);
     }
 
     const themeFromMediaQuery =
       window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
 
-    listRef.value?.setAttribute("data-theme", themeFromMediaQuery);
-    localStorage.setItem("theme", themeFromMediaQuery);
+    listRef.value?.setAttribute('data-theme', themeFromMediaQuery);
+    localStorage.setItem('theme', themeFromMediaQuery);
   });
 
   const onMountDirHandler = $((_: QwikVisibleEvent, _1: HTMLElement) => {
-    if (dir && dir !== "auto") return;
+    if (dir && dir !== 'auto') return;
 
     const newDir = window.getComputedStyle(document.documentElement).direction;
-    listRef.value?.setAttribute("dir", newDir);
+    listRef.value?.setAttribute('dir', newDir);
 
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "dir"
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'dir'
         ) {
-          const value = (mutation.target as HTMLElement).getAttribute("dir");
-          if (value === "auto" || !value) {
-            return listRef.value!.setAttribute("dir", newDir);
+          const value = (mutation.target as HTMLElement).getAttribute('dir');
+          if (value === 'auto' || !value) {
+            return listRef.value!.setAttribute('dir', newDir);
           }
-          listRef.value!.setAttribute("dir", value);
+          listRef.value!.setAttribute('dir', value);
         }
       });
     });
 
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["dir"],
+      attributeFilter: ['dir'],
     });
   });
 
@@ -163,10 +164,10 @@ const Toaster = component$<ToasterProps>((props) => {
   });
 
   useOnDocument(
-    "keydown",
+    'keydown',
     $((ev) => {
       const isHotkeyPressed = hotkey.every(
-        (key) => (ev as any)[key] || ev.code === key
+        (key) => (ev as any)[key] || ev.code === key,
       );
 
       if (isHotkeyPressed) {
@@ -175,13 +176,13 @@ const Toaster = component$<ToasterProps>((props) => {
       }
 
       if (
-        ev.code === "Escape" &&
+        ev.code === 'Escape' &&
         (document.activeElement === listRef.value ||
           listRef.value?.contains(document.activeElement))
       ) {
         expanded.value = false;
       }
-    })
+    }),
   );
 
   useTask$(({ track, cleanup }) => {
@@ -206,7 +207,7 @@ const Toaster = component$<ToasterProps>((props) => {
       onQVisible$={[onMountHandler, onMountThemeHandler, onMountDirHandler]}
     >
       {possiblePositions.value.map((position, index) => {
-        const [y, x] = position.split("-");
+        const [y, x] = position.split('-');
         return (
           <ol
             key={position}
@@ -220,13 +221,13 @@ const Toaster = component$<ToasterProps>((props) => {
             data-y-position={y}
             data-x-position={x}
             style={{
-              "--front-toast-height": `${heights.value[0]?.height ?? 0}px`,
-              "--offset":
-                typeof offset === "number"
+              '--front-toast-height': `${heights.value[0]?.height ?? 0}px`,
+              '--offset':
+                typeof offset === 'number'
                   ? `${offset}px`
-                  : offset ?? VIEWPORT_OFFSET,
-              "--width": `${TOAST_WIDTH}px`,
-              "--gap": `${gap}px`,
+                  : (offset ?? VIEWPORT_OFFSET),
+              '--width': `${TOAST_WIDTH}px`,
+              '--gap': `${gap}px`,
               ...style,
             }}
             onBlur$={(event, target) => {
@@ -246,7 +247,7 @@ const Toaster = component$<ToasterProps>((props) => {
             onFocusIn$={(event, target) => {
               const isNotDismissible =
                 target instanceof HTMLElement &&
-                target.dataset.dismissible === "false";
+                target.dataset.dismissible === 'false';
 
               if (isNotDismissible) return;
 
@@ -256,8 +257,12 @@ const Toaster = component$<ToasterProps>((props) => {
                   event.relatedTarget as HTMLElement;
               }
             }}
-            onMouseEnter$={() => (expanded.value = true)}
-            onMouseMove$={() => (expanded.value = true)}
+            onMouseEnter$={() => {
+              expanded.value = true;
+            }}
+            onMouseMove$={() => {
+              expanded.value = true;
+            }}
             onMouseLeave$={() => {
               // Avoid setting expanded to false when interacting with a toast, e.g. swiping
               if (!interacting.value) {
@@ -267,18 +272,20 @@ const Toaster = component$<ToasterProps>((props) => {
             onPointerDown$={(_, target) => {
               const isNotDismissible =
                 target instanceof HTMLElement &&
-                target.dataset.dismissible === "false";
+                target.dataset.dismissible === 'false';
 
               if (isNotDismissible) return;
               interacting.value = true;
             }}
-            onPointerUp$={() => (interacting.value = false)}
+            onPointerUp$={() => {
+              interacting.value = false;
+            }}
           >
             {toasts.value
               .filter(
                 (toast) =>
                   (!toast.position && index === 0) ||
-                  toast.position === position
+                  toast.position === position,
               )
               .map((toast, index) => (
                 <Toast
@@ -303,7 +310,7 @@ const Toaster = component$<ToasterProps>((props) => {
                   actionButtonStyle={toastOptions?.actionButtonStyle}
                   removeToast={removeToast}
                   toasts={toasts.value.filter(
-                    (t) => t.position === toast.position
+                    (t) => t.position === toast.position,
                   )}
                   heights={heights}
                   expandByDefault={expand ?? false}
@@ -311,6 +318,7 @@ const Toaster = component$<ToasterProps>((props) => {
                   loadingIcon={loadingIcon}
                   expanded={expanded}
                   pauseWhenPageIsHidden={pauseWhenPageIsHidden ?? false}
+                  progressBar={toastOptions?.progressBar ?? false}
                 />
               ))}
           </ol>

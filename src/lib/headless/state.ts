@@ -1,12 +1,12 @@
-import { JSXOutput } from "@builder.io/qwik";
+import type { JSXOutput } from '@builder.io/qwik';
 import type {
   ExternalToast,
-  ToastT,
   PromiseData,
   PromiseT,
+  ToastT,
   ToastToDismiss,
   ToastTypes,
-} from "./types";
+} from './types';
 
 let toastsCounter = 1;
 
@@ -38,11 +38,11 @@ const create = (
     type?: ToastTypes;
     promise?: PromiseT;
     jsx?: JSXOutput;
-  }
+  },
 ) => {
   const { message, ...rest } = data;
   const id =
-    typeof data?.id === "number" || (data.id && data.id?.length > 0)
+    typeof data?.id === 'number' || (data.id && data.id?.length > 0)
       ? data.id
       : toastsCounter++;
   const alreadyExists = toasts.find((toast) => {
@@ -76,7 +76,7 @@ const dismiss = (id?: number | string) => {
   if (!id) {
     return toasts.forEach((toast) => {
       subscribers.forEach((subscriber) =>
-        subscriber({ id: toast.id, dismiss: true })
+        subscriber({ id: toast.id, dismiss: true }),
       );
     });
   }
@@ -90,28 +90,28 @@ const message = (message: string | JSXOutput, data?: ExternalToast) => {
 };
 
 const error = (message: string | JSXOutput, data?: ExternalToast) => {
-  return create({ ...data, message, type: "error" });
+  return create({ ...data, message, type: 'error' });
 };
 
 const success = (message: string | JSXOutput, data?: ExternalToast) => {
-  return create({ ...data, type: "success", message });
+  return create({ ...data, type: 'success', message });
 };
 
 const info = (message: string | JSXOutput, data?: ExternalToast) => {
-  return create({ ...data, type: "info", message });
+  return create({ ...data, type: 'info', message });
 };
 
 const warning = (message: string | JSXOutput, data?: ExternalToast) => {
-  return create({ ...data, type: "warning", message });
+  return create({ ...data, type: 'warning', message });
 };
 
 const loading = (message: string | JSXOutput, data?: ExternalToast) => {
-  return create({ ...data, type: "loading", message });
+  return create({ ...data, type: 'loading', message });
 };
 
 const promise = <ToastData>(
   promise: PromiseT<ToastData>,
-  data?: PromiseData<ToastData>
+  data?: PromiseData<ToastData>,
 ) => {
   if (!data) {
     // Nothing to show
@@ -123,10 +123,10 @@ const promise = <ToastData>(
     id = create({
       ...data,
       promise,
-      type: "loading",
+      type: 'loading',
       message: data.loading,
       description:
-        typeof data.description !== "function" ? data.description : undefined,
+        typeof data.description !== 'function' ? data.description : undefined,
     });
   }
 
@@ -137,48 +137,48 @@ const promise = <ToastData>(
   p.then(async (response) => {
     // TODO: Clean up TS here, response has incorrect type
     // @ts-expect-error
-    if (response && typeof response.ok === "boolean" && !response.ok) {
+    if (response && typeof response.ok === 'boolean' && !response.ok) {
       shouldDismiss = false;
       const message =
-        typeof data.error === "function"
+        typeof data.error === 'function'
           ? await data.error({
               // @ts-expect-error
               error: `HTTP error! status: ${response.status}`,
             })
           : data.error;
       const description =
-        typeof data.description === "function"
+        typeof data.description === 'function'
           ? await data.description(
               // @ts-expect-error
-              `HTTP error! status: ${response.status}`
+              `HTTP error! status: ${response.status}`,
             )
           : data.description;
-      create({ id, type: "error", message, description });
+      create({ id, type: 'error', message, description });
     } else if (data.success !== undefined) {
       shouldDismiss = false;
       const message =
-        typeof data.success === "function"
+        typeof data.success === 'function'
           ? await data.success(response)
           : data.success;
       const description =
-        typeof data.description === "function"
+        typeof data.description === 'function'
           ? await data.description(response)
           : data.description;
-      create({ id, type: "success", message, description });
+      create({ id, type: 'success', message, description });
     }
   })
     .catch(async (error) => {
       if (data.error !== undefined) {
         shouldDismiss = false;
         const message =
-          typeof data.error === "function"
+          typeof data.error === 'function'
             ? await data.error(error)
             : data.error;
         const description =
-          typeof data.description === "function"
+          typeof data.description === 'function'
             ? await data.description(error)
             : data.description;
-        create({ id, type: "error", message, description });
+        create({ id, type: 'error', message, description });
       }
     })
     .finally(() => {
@@ -196,7 +196,7 @@ const promise = <ToastData>(
 
 const custom = (
   jsx: (id: number | string) => JSXOutput,
-  data?: ExternalToast
+  data?: ExternalToast,
 ) => {
   const id = data?.id || toastsCounter++;
   create({ jsx: jsx(id), id, ...data });

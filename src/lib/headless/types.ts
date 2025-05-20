@@ -1,26 +1,25 @@
-import {
+import type {
+  CSSProperties,
   ClassList,
   Component,
-  CSSProperties,
   JSXOutput,
   QRL,
-  QRLEventHandlerMulti,
   Signal,
-} from "@builder.io/qwik";
+} from '@builder.io/qwik';
 
 export type ToastTypes =
-  | "normal"
-  | "action"
-  | "success"
-  | "info"
-  | "warning"
-  | "error"
-  | "loading"
-  | "default";
+  | 'normal'
+  | 'action'
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'error'
+  | 'loading'
+  | 'default';
 
 export type PromiseT<Data = any> = Promise<Data> | (() => Promise<Data>);
 
-export type PromiseExternalToast = Omit<ExternalToast, "description">;
+export type PromiseExternalToast = Omit<ExternalToast, 'description'>;
 
 export type PromiseData<ToastData = any> = PromiseExternalToast & {
   loading?: string;
@@ -89,22 +88,23 @@ export interface ToastT {
   classes?: ToastClassnames;
   descriptionClass?: string;
   position?: Position;
+  progressBar?: boolean;
 }
 
 export function isAction(action: Action | JSXOutput): action is Action {
   return (
     (action as Action).label !== undefined &&
-    typeof (action as Action).onClick$ === "function"
+    typeof (action as Action).onClick$ === 'function'
   );
 }
 
 export type Position =
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right"
-  | "top-center"
-  | "bottom-center";
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'top-center'
+  | 'bottom-center';
 export interface HeightT {
   height: number;
   toastId: number | string;
@@ -121,11 +121,12 @@ interface ToastOptions {
   duration?: number;
   unstyled?: boolean;
   classes?: ToastClassnames;
+  progressBar?: boolean;
 }
 
 export interface ToasterProps {
   invert?: Signal<boolean> | boolean;
-  theme?: "light" | "dark" | "system";
+  theme?: 'light' | 'dark' | 'system';
   position?: Position;
   hotkey?: string[];
   richColors?: boolean;
@@ -138,7 +139,7 @@ export interface ToasterProps {
   class?: string;
   style?: CSSProperties;
   offset?: string | number;
-  dir?: "rtl" | "ltr" | "auto";
+  dir?: 'rtl' | 'ltr' | 'auto';
   /**
    * @deprecated Please use the `icons` prop instead:
    * ```jsx
@@ -179,15 +180,16 @@ export interface ToastProps {
   icons?: ToastIcons;
   closeButtonAriaLabel?: string;
   pauseWhenPageIsHidden: boolean;
+  progressBar?: boolean;
 }
 
 export enum SwipeStateTypes {
-  SwipedOut = "SwipedOut",
-  SwipedBack = "SwipedBack",
-  NotSwiped = "NotSwiped",
+  SwipedOut = 'SwipedOut',
+  SwipedBack = 'SwipedBack',
+  NotSwiped = 'NotSwiped',
 }
 
-export type Theme = "light" | "dark" | "system";
+export type Theme = 'light' | 'dark' | 'system';
 
 export interface ToastToDismiss {
   id: number | string;
@@ -196,7 +198,7 @@ export interface ToastToDismiss {
 
 export type ExternalToast = Omit<
   ToastT,
-  "id" | "type" | "title" | "jsx" | "delete" | "promise"
+  'id' | 'type' | 'title' | 'jsx' | 'delete' | 'promise'
 > & {
   id?: number | string;
 };
